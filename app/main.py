@@ -2,28 +2,23 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 
 from agent import chat
+from app.router import route_question
 from emotion import detect_emotion
 
-app = FastAPI(title="Cuziee AI")
+app = FastAPI(title="Cuziee AI v2")
 
 
-class ChatRequest(BaseModel):
-    message: str
+class QueryRequest(BaseModel):
+    question: str
+
 
 
 @app.get("/")
 def home():
-    return {"message": "Cuziee AI API running"}
+    return {"message": "Cuziee AI v2 running"}
 
 
-@app.post("/chat")
-def chat_api(req: ChatRequest):
-    emotion = detect_emotion(req.message)
-    response = chat(req.message)
-
-    print(response)
-
-    return {
-        "emotion": emotion,
-        "response": response
-    }
+@app.post("/ask")
+def ask(req: QueryRequest):
+    result = route_question(req.question)
+    return result

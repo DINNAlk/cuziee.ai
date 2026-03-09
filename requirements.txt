@@ -7,3 +7,5 @@ langchain-classic
 python-dotenv
 gradio
 pydantic
+tavily-python
+langsmith

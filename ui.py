@@ -8,7 +8,7 @@ def respond(message, history):
 
 demo = gr.ChatInterface(
     fn=respond,
-    title="Cuziee AI",
+    title="Cuziee AI V1",
     description="Your emotional AI companion",
     textbox=gr.Textbox(placeholder="Talk to Cuziee...")
 )
