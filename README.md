@@ -1,123 +1,182 @@
-# 💬 Cuziee AI
+# Cuziee AI v2
 
-Cuziee is an AI-powered emotional companion that allows users to chat about feelings, relationships, and personal situations.  
-The system uses a language model to generate supportive responses and can detect basic emotions from user messages.
+Cuziee is an AI-powered conversational assistant designed to help users think through life situations, emotions, relationships, and personal growth.
 
-Cuziee provides both:
+The system routes user questions to specialized expert models such as education, wealth, relationships, and mindset analysis. If the AI determines that a question requires up-to-date or external information, it can automatically search the web and include relevant results.
 
-- a **FastAPI backend API**
-- a **Gradio chat interface**
+Cuziee provides both a FastAPI backend API and a Gradio chat interface for interacting with the AI assistant.
 
-for interacting with the AI assistant.
+------------------------------------------------------------
 
----
+Features
 
-## Features
+AI-powered conversation using OpenAI models
+Router-based expert AI system
+Specialized expert models for different life areas
+Automatic web search when the AI requires updated information
+Conversation history awareness
+LangSmith tracing to monitor AI reasoning and responses
+FastAPI backend API for programmatic access
+Browser chat interface using Gradio
+Modular architecture for easy expansion and experimentation
 
-- AI conversation using OpenAI models  
-- Emotion detection from user messages  
-- Context-aware responses with conversation history  
-- FastAPI backend API for programmatic access  
-- Simple browser chat interface using Gradio  
-- Lightweight and easy to run locally  
+------------------------------------------------------------
 
----
+Expert AI Models
 
-## Technologies Used
+Cuziee currently includes multiple expert models that handle different types of questions.
 
-- Python  
-- FastAPI  
-- LangChain  
-- OpenAI API  
-- Gradio  
-- Pydantic  
-- Python-dotenv  
+The router automatically selects the most appropriate model to answer the user's question.
 
----
+------------------------------------------------------------
 
-## Setup & Installation
+Smart Web Search
 
-Clone the repository:
+If the AI detects that a question requires recent or real-world information, the system can perform a web search and include relevant results.
 
-```bash
+This allows Cuziee to answer questions about:
+
+recent events  
+current trends  
+sports results  
+new technologies  
+real-world factual information
+
+------------------------------------------------------------
+
+AI Observability
+
+Cuziee integrates LangSmith to monitor how the AI agent operates internally.
+
+Developers can inspect:
+
+router decisions  
+model prompts  
+expert model responses  
+tool usage such as web search  
+full reasoning traces
+
+------------------------------------------------------------
+
+Technologies Used
+
+Python  
+FastAPI  
+LangChain  
+OpenAI API  
+Tavily Search API  
+LangSmith  
+Gradio  
+Pydantic  
+Python-dotenv  
+
+------------------------------------------------------------
+
+Project Architecture
+
+Cuziee
+│
+├── app
+│   ├── main.py
+│   ├── router.py
+│   └── config.py
+│
+├── models
+│   ├── base_model.py
+│   ├── education_model.py
+│   ├── wealth_model.py
+│   ├── relationship_model.py
+│   └── mental_model.py
+│
+├── tools
+│   └── web_search.py
+│
+├── ui
+│   └── gradio_app.py
+│
+├── .env
+├── requirements.txt
+└── README.md
+
+------------------------------------------------------------
+
+Setup and Installation
+
+Clone the repository
+
 git clone https://github.com/YOUR_USERNAME/cuziee.git
 cd cuziee
-```
 
-Create a virtual environment:
+Create a virtual environment
 
-```bash
 python -m venv .venv
-```
 
 Activate it
 
 Windows
 
-```bash
 .venv\Scripts\activate
-```
 
 Install dependencies
 
-```bash
 pip install -r requirements.txt
-```
 
----
+------------------------------------------------------------
 
-## Environment Variables
+Environment Variables
 
-Create a `.env` file in the project root.
+Create a .env file in the project root.
 
-```
-OPENAI_API_KEY=your_openai_api_key
-```
+OPENAI_API_KEY=your_openai_api_key  
+TAVILY_API_KEY=your_tavily_api_key  
+LANGSMITH_API_KEY=your_langsmith_api_key  
+LANGSMITH_TRACING=true  
+LANGSMITH_PROJECT=Cuziee-v2  
 
-**Important:**  
-Use your own **OpenAI API key** to get better and more accurate AI responses.
+Important:
 
----
+Use your own OpenAI API key to obtain better and more accurate AI responses.
 
-## ▶️ Running the API
+------------------------------------------------------------
+
+Running the API
 
 Start the FastAPI server
 
-```bash
 uvicorn app.main:app --reload
-```
 
 Open API documentation
 
-```
 http://127.0.0.1:8000/docs
-```
 
----
+------------------------------------------------------------
 
-## Running the Chat Interface
+Running the Chat Interface
 
 Run the Gradio chat interface
 
-```bash
-python ui.py
-```
+python -m ui.gradio_app
+
 Open in browser
 
-```
 http://127.0.0.1:7860
-```
 
----
-## Project Status
+------------------------------------------------------------
 
-This project is currently in the **development stage**.
+Future Plans
+
+Cuziee is evolving into a multi-expert AI assistant system.
+
+------------------------------------------------------------
+
+Project Status
+
+This project is currently in the development stage.
 
 More features and improvements are coming soon.
 
-Stay tuned...
-
-Await... Let's gooo... 
+Await...
+Let's gooo...
 
 ---
 
