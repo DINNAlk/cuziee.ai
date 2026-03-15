@@ -1,182 +1,196 @@
-# Cuziee AI v2
+# Cuziee AI
 
-Cuziee is an AI-powered conversational assistant designed to help users think through life situations, emotions, relationships, and personal growth.
+Cuziee is an AI-powered conversational assistant designed to help users discuss life situations, relationships, mindset, education, and personal growth.
 
-The system routes user questions to specialized expert models such as education, wealth, relationships, and mindset analysis. If the AI determines that a question requires up-to-date or external information, it can automatically search the web and include relevant results.
+The system routes each question to specialized AI expert models that provide contextual responses based on the user's problem. It can also perform web searches when the AI determines that current or external information is required.
 
-Cuziee provides both a FastAPI backend API and a Gradio chat interface for interacting with the AI assistant.
+Cuziee includes a FastAPI backend, a Gradio chat interface, expert AI models, database-based conversation memory, and web search capabilities.
 
-------------------------------------------------------------
+The project is designed with a modular architecture so that additional expert models, tools, and intelligence systems can be added in future versions.
 
-Features
+---
 
-AI-powered conversation using OpenAI models
-Router-based expert AI system
-Specialized expert models for different life areas
-Automatic web search when the AI requires updated information
-Conversation history awareness
-LangSmith tracing to monitor AI reasoning and responses
-FastAPI backend API for programmatic access
-Browser chat interface using Gradio
-Modular architecture for easy expansion and experimentation
+## Features
 
-------------------------------------------------------------
+Router-based AI architecture that selects the most relevant expert model for each question.
 
-Expert AI Models
+Specialized AI expert models for:
 
-Cuziee currently includes multiple expert models that handle different types of questions.
+- Education  
+- Wealth and financial mindset  
+- Relationships and emotional situations  
+- Mental attitude and behavioral analysis  
 
-The router automatically selects the most appropriate model to answer the user's question.
+Conversation memory stored in a PostgreSQL database so chats can persist across sessions.
 
-------------------------------------------------------------
+Automatic web search using Tavily when the AI determines that the answer may require current or external information.
 
-Smart Web Search
+LangSmith tracing support for monitoring how the AI agent routes questions and generates responses.
 
-If the AI detects that a question requires recent or real-world information, the system can perform a web search and include relevant results.
+FastAPI backend API for programmatic access.
 
-This allows Cuziee to answer questions about:
+Gradio chat interface for a simple browser-based user experience.
 
-recent events  
-current trends  
-sports results  
-new technologies  
-real-world factual information
+Modular architecture designed for future AI expansion.
 
-------------------------------------------------------------
+---
 
-AI Observability
-
-Cuziee integrates LangSmith to monitor how the AI agent operates internally.
-
-Developers can inspect:
-
-router decisions  
-model prompts  
-expert model responses  
-tool usage such as web search  
-full reasoning traces
-
-------------------------------------------------------------
-
-Technologies Used
+## Technologies Used
 
 Python  
 FastAPI  
-LangChain  
-OpenAI API  
-Tavily Search API  
-LangSmith  
 Gradio  
+LangChain  
+LangSmith  
+OpenAI API  
+Tavily Web Search API  
+PostgreSQL  
+SQLAlchemy  
 Pydantic  
 Python-dotenv  
 
-------------------------------------------------------------
+---
 
-Project Architecture
-
+## Project Architecture
 Cuziee
 │
 ├── app
-│   ├── main.py
-│   ├── router.py
-│   └── config.py
+│ ├── main.py
+│ ├── router.py
+│ ├── config.py
+│ └── db
+│ ├── database.py
+│ ├── models.py
+│ └── repository.py
 │
 ├── models
-│   ├── base_model.py
-│   ├── education_model.py
-│   ├── wealth_model.py
-│   ├── relationship_model.py
-│   └── mental_model.py
+│ ├── base_model.py
+│ ├── education_model.py
+│ ├── wealth_model.py
+│ ├── relationship_model.py
+│ └── mental_model.py
 │
 ├── tools
-│   └── web_search.py
+│ └── web_search.py
 │
 ├── ui
-│   └── gradio_app.py
+│ └── gradio_app.py
 │
 ├── .env
 ├── requirements.txt
 └── README.md
 
-------------------------------------------------------------
 
-Setup and Installation
+---
 
-Clone the repository
+## Setup and Installation
 
+Clone the repository.
+
+---
+
+## Setup and Installation
+
+Clone the repository.
 git clone https://github.com/YOUR_USERNAME/cuziee.git
+
 cd cuziee
 
-Create a virtual environment
+
+Create a virtual environment.
+
 
 python -m venv .venv
 
-Activate it
 
-Windows
+Activate it.
+
+Windows:
+
 
 .venv\Scripts\activate
 
-Install dependencies
+
+Install dependencies.
+
 
 pip install -r requirements.txt
 
-------------------------------------------------------------
 
-Environment Variables
+---
 
-Create a .env file in the project root.
+## Environment Variables
 
-OPENAI_API_KEY=your_openai_api_key  
-TAVILY_API_KEY=your_tavily_api_key  
-LANGSMITH_API_KEY=your_langsmith_api_key  
-LANGSMITH_TRACING=true  
-LANGSMITH_PROJECT=Cuziee-v2  
+Create a `.env` file in the project root.
+
+
+OPENAI_API_KEY=your_openai_api_key
+TAVILY_API_KEY=your_tavily_api_key
+LANGSMITH_API_KEY=your_langsmith_api_key
+LANGSMITH_TRACING=true
+LANGSMITH_PROJECT=Cuziee-v2
+
+DATABASE_URL=postgresql+psycopg2://postgres:password@localhost:5432/cuziee_db
 
 Important:
 
 Use your own OpenAI API key to obtain better and more accurate AI responses.
 
-------------------------------------------------------------
+---
 
-Running the API
+## Database Setup
 
-Start the FastAPI server
+Create the PostgreSQL database.
+CREATE DATABASE cuziee_db;
 
-uvicorn app.main:app --reload
 
-Open API documentation
+You can manage the database using DBeaver or any PostgreSQL client.
+
+The application will automatically create the required tables when the backend server starts.
+
+---
+
+## Running the Backend API
+
+Start the FastAPI server.
+
+
+python -m uvicorn app.main:app --reload
+
+
+Open the API documentation.
+
 
 http://127.0.0.1:8000/docs
 
-------------------------------------------------------------
 
-Running the Chat Interface
+---
 
-Run the Gradio chat interface
+## Running the Chat Interface
+
+Start the Gradio chat interface.
+
 
 python -m ui.gradio_app
 
-Open in browser
+
+Open the chat interface in your browser.
+
 
 http://127.0.0.1:7860
 
-------------------------------------------------------------
 
-Future Plans
+---
 
-Cuziee is evolving into a multi-expert AI assistant system.
+## How the AI Works
 
-------------------------------------------------------------
+1. The user sends a question from the Gradio interface.
+2. The request is sent to the FastAPI backend.
+3. The router AI decides which expert model should answer the question.
+4. The selected expert model generates a response using the OpenAI model.
+5. If the AI determines that external information is needed, a web search is performed.
+6. The final response is returned to the user and saved in the database.
 
-Project Status
-
-This project is currently in the development stage.
-
-More features and improvements are coming soon.
-
-Await...
-Let's gooo...
 
 ---
 
