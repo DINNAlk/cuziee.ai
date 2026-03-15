@@ -9,3 +9,5 @@ gradio
 pydantic
 tavily-python
 langsmith
+sqlalchemy
+psycopg2-binary
